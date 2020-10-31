@@ -70,8 +70,9 @@ Procedure prGestionPC;
                 While(Not(EOF(FP))) Do
                     Read;
                 Write(FP,TmpCompte);
+                Close(FP);
     		End;
-        Close(FP);
+        
     End;
 
 Var
@@ -114,7 +115,6 @@ Begin
         Writeln('2: Gestion des ecritures.');
         Readln(Choix);
         Case Choix Of 
-        
             1 : prGestionPC;
             2 : prGestionJournal
         End;
