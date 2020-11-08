@@ -226,9 +226,9 @@ Begin
 	  Case ChMenu Of
 	    1: prSaisieCompte(FP);
 	    2: prAfficherComptes(FP);
-			3: prMAJCompte(FP);
-			4: prSupprimerCompte(FP);
-			5: quit:= true;
+        3: prMAJCompte(FP);
+		4: prSupprimerCompte(FP);
+		5: quit:= true;
 	  End;
 End;
 

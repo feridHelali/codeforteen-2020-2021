@@ -21,13 +21,14 @@ Type
   TJournal = Array [1..5000] Of TEcriture;
   TFPLan = File Of TCompte;
   TFJournal = File Of TEcriture;
+
 Var
   Choix : 1..2;
   FP: TFPlan;
 	FJournal:TFJournal;
   Exit: Boolean;
   Res: Char;
-	
+    extrait:Text;
  (* fnFormatString this functon format a string with a givin size*)
 function fnFormatString(vStr:String;strln:Integer):String;
 var extentionStr:String;
@@ -79,12 +80,11 @@ Procedure prGestionPC(Var FP:TFPlan);
 	      Reset(FP);
 	 			{$I+}
 	 			If IOResult<>0 Then Rewrite(FP); 
+
 	    	while not EOF(FP) do read(FP,tmp); (* Atteindre fin de Fichier *)
 				(*
 				   you can replace the line above With
 					 seek(FP,FileSize(FP));
-					 Or
-					 SeekEof(FP);
 				*)
 	    	Write(FP,TmpCompte);
 	 End;
@@ -396,16 +396,100 @@ Procedure prGestionJournal(Var FJournal:TFJournal;var FPlan:TFPLan);
 		Close(FJournal);
 		
 	end;
+Procedure prExtraitCompte(Var FJournal:TFJournal;Var FPlan:TFPLan; var extrait:Text);
+var
+	code:Integer;
+	tmpecriture:tecriture;
+Begin
+  Clrscr;
+  writeln('E X T R A I T    D E    C O M P T E');
+	GoToXY(10,4);Write('CODE: ');
+	GoTOXY(17,4);Read(code);
+	if fnlookupforaccount(code,fplan)<>'Compte n''existe pas. Veillez l''ajouter' then
+		Begin
+			{$I-}
+				reset(fjournal);
+			{$I+}
+			if Ioresult<>0 then
+				writeln('Probleme de fichier Erreur Num: ',ioresult)
+			else
+				Begin
+					rewrite(extrait);
+					WriteLn(extrait,'<!DOCTYPE html><body> <table><thead><span>',code,'</span><span>',fnlookupforaccount(code,fplan),'</span></thead><tbody>');
+					While not EOF(fjournal) do
+					begin
+						read(fjournal,tmpecriture);
+						if (tmpecriture.dbcompte =code) or (tmpecriture.crcompte=code) then
+							begin
+								write(extrait,'<tr><td>',tmpecriture.dateecriture.day:2,'/',tmpecriture.dateecriture.Month:2,'/',tmpecriture.dateecriture.Year:4,'</td><td>',tmpecriture.LibelleEcriture,'</td>');
+								If tmpEcriture.DbCompte=Code Then
+									Writeln(extrait,'<td>',TmpEcriture.MNTDebit:10:3,'</td><td></td>')
+								Else
+									Writeln(extrait,'<td></td><td>',TmpEcriture.MNTCredit:10:3,'</td>')
+							end;
+					end;
+					Writeln(extrait,'</tr></tbody></table></body></html>');
+					Close(extrait);
+				end
+		End
+	Else
+		writeln('Compte n"existe pas');
+	Close(Fjournal);
+End;
 
-		(* ------------------------------------------- prExtraitCompte ------------------------------*)
-	Procedure prExtraitCompte(Var FJournal:TFJournal;var FPlan:TFPLan);
-	begin
-	 ClrScr;
-		WriteLn('prExtraitCompte not yet implemented');
-	end;
-
-
- 
+Procedure prExportToCSV(Var FJournal:TFJournal;Var FPlan:TFPLan);
+var
+	code:Integer;
+	tmpecriture:tEcriture;
+	vCSV:Text;
+	strCode:String;
+	SDebit,SCredit:Real;
+Begin
+  Clrscr;
+  writeln('E X P O R T  V E R S  C S V');
+	GoToXY(10,4);Write('CODE: ');
+	GoTOXY(17,4);Read(code);
+	if fnlookupforaccount(code,fplan)<>'Compte n''existe pas. Veillez l''ajouter' then
+    Begin
+    	str(Code,strCode);
+    	Assign(vCSV,strCode+fnlookupforaccount(code,fplan)+'.csv');
+        {$I-}
+            ReSet(fjournal);
+		{$I+}
+		if Ioresult<>0 then
+			writeln('Probleme de fichier Erreur Num: ',ioresult)
+		else
+		Begin
+			ReWrite(vCSV);
+			WriteLn(vCSV,'Date;Libelle;Mnt_Debit;Mnt_Credit');
+            SDebit:=0;
+            SCredit:=0;
+			While Not(EOF(fjournal)) Do
+			Begin
+                Read(FJournal,tmpEcriture);
+                if (tmpEcriture.DBCompte =code) or (tmpEcriture.CRCompte=code) then
+                Begin
+                	with tmpEcriture Do
+                	Begin
+                		If DBCompte=Code Then
+                		Begin
+                            Writeln(vCSV,fnDateToString(DateEcriture),';',LibelleEcriture,';',MntDebit:7:3,';','');
+                            SDebit:=SDebit+MntDebit;
+                        End
+                        Else
+                        Begin
+                            Writeln(vCSV,fnDateToString(DateEcriture),';',LibelleEcriture,';','',';',MntCredit:7:3);
+                            SCredit:=SCredit+MntCredit;
+                        End;
+                    End;
+                End;
+			End;
+			Writeln(vCSV,'',';','',';',SDebit:7:3,';',SCredit:7:3);
+			Close(vCSV);
+        End;
+    End;
+    Close(fJournal);
+End;
   Procedure prSupprimerEcriture(Var FJournal:TFJournal;Var FPlan:TFPLan);
 	var currentFileSize, position:LongInt;
 	    tmpEcriture:TEcriture;
@@ -465,18 +549,20 @@ Begin
 	  Gotoxy(20,10); Writeln('3 : Modifier Piece Comptable.');
 	  Gotoxy(20,12); Writeln('4 : Extrait de Compte.');
 		Gotoxy(20,14); Writeln('5 : Supprimer Ecriture.');
-		Gotoxy(20,16); Writeln('6 : Retour Menu Principal');
+		Gotoxy(20,16); Writeln('6 : Export To CSV');
+		Gotoxy(20,18); Writeln('7 : Retour Au Menu Principal');
 	  Gotoxy(15,25); Write('Votre Choix:');
 	  Repeat
 	    Readln(ChMenu);
-		Until (ChMenu In [1..5]);
+		Until (ChMenu In [1..7]);
 	  Case ChMenu Of
 	    1: prSaisePiece(FJournal,FPlan);
 	    2: prListerPiece(FJournal,FPlan);
 			3: prModifierPiece(FJournal,FPlan);
-			4: prExtraitCompte(FJournal,FPlan);
+			4: prExtraitCompte(FJournal,FPlan,extrait);
 			5: prSupprimerEcriture(FJournal,FPlan);
-			6: quit:= true;
+            6:prExportToCSV(FJournal,FPlan);
+			7: quit:= true;
 	  End;
 
 End;
@@ -486,6 +572,7 @@ End;
 
 (*Main Program*)
 Begin
+  	Assign(extrait,'extrait.html');
   Assign(FP,'PlanComptable.dat');
 	Assign(FJournal,'Journal.dat');
   Exit := False;
