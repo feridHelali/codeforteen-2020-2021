@@ -312,7 +312,7 @@ Procedure prGestionJournal(Var FJournal:TFJournal;var FPlan:TFPLan);
 				with tmpEcriture.DateEcriture do  Begin
 					GotoXY(31,4);Readln(Day);
 					GotoXY(34,4);Readln(Month);
-					GotoXY(37,4);Readln(Day);
+					GotoXY(37,4);Readln(Year);
 				end;
 				GotoXY(31,5);Readln(tmpEcriture.LibelleEcriture);
 				GotoXY(31,6);Readln(tmpEcriture.DBCompte);
