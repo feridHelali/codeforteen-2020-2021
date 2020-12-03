@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa JS Workshop</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left">
+            <h1>Municipalité de Mahdia</h1>
+            <div id="message-output"></div>
+            <form action="#" method="get" name="registerForm"
+                onsubmit="(()=>{event.preventDefault();validateTheForm()})()">
+                <fieldset name="identity">
+                    <div class="formControl">
+                        <label for="fullname">Nom & Prenom</label>
+                        <input type="text" name="fulltext">
+                    </div>
+
+                    <div class="formControl">
+                        <label for="cin">CIN</label>
+                        <input type="text" name="cin">
+                    </div>
+
+                    <div class="formControl">
+                        <label for="gender">Genre</label>
+                        <select name="gender" id="gender">
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
+                    </div>
+
+                    <div class="formControl">
+                        <label for="birthdate">Date de Naissance</label>
+                        <input type="date" name="birthdate">
+                    </div>
+
+                    <div class="formControl">
+                        <label for="email">email</label>
+                        <input type="text" name="email">
+                    </div>
+
+                </fieldset>
+
+                <fieldset name="adress" value="Adress">
+                    <div class="formControl">
+                        <label for="address">Adress</label>
+                        <input type="text" name="adress">
+                    </div>
+                    <div class="formControl">
+                        <label for="zipcode">Code Postal</label>
+                        <input type="number" name="zipcode">
+                    </div>
+
+                    <div class="formControl">
+                        <label for="city">Ville</label>
+                        <select name="city" id="city">
+                            <option value="Mahdia">Mahdia</option>
+                            <option value="Tunis">Tunis</option>
+                            <option value="Sousse">Sousse</option>
+                            <option value="Sfax">Sfax</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset name="situation" value="Situation">
+                    <div class="formControl">
+                        <label for="married">Situation Conjugale</label>
+                        <input type="checkbox" name="situation" value="maried">Maried
+                        <input type="checkbox" name="situation" value="single">Single
+                    </div>
+                </fieldset>
+
+                <div class="formControl">
+                    <label for="observation">Observartion</label>
+                    <textarea name="observation" id="observation" cols="50" rows="10"></textarea>
+                </div>
+                <div class="formActions">
+                    <input class="actions" type="submit" value="send">
+                    <input class="actions" type="reset" value="clear">
+                </div>
+            </form>
+        </div>
+        <div class="right">
+            <pre>
+                <code id="output">
+        </code>
+        </pre>
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

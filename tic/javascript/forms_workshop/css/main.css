@@ -1,0 +1,102 @@
+.container{
+    margin: 2% auto;
+    padding: 7px;
+    font-family: monospace;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#message-output{
+    font-size: .9rem;
+    padding: 3px;
+    margin: 2px;
+    width: 100%;
+    background-color: cornsilk;
+    color: crimson;
+}
+
+.left{
+    width:50%;
+}
+.right{
+    width:50%;
+}
+
+form{
+    display:flex;
+    flex-direction: column;
+}
+
+fieldset{
+    font-size: 1rem;
+    color: rgb(22, 126, 223);
+    font-weight: 500;
+    padding:4px;
+    margin:10px;
+}
+options{
+    width: 100%;
+    color: rgb(22, 126, 223);
+    font-weight: 500;
+}
+
+.formControl{
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+}
+
+.formControl>label{
+    width: 50%;
+    padding:7px;
+}
+.formControl>input{
+    width: 50%;
+    padding:7px;
+}
+
+input{
+    font-size: 1rem;
+    padding:3px;
+    margin:2px;
+}
+
+.formActions{
+    padding:10px;
+    margin:3px;
+    display: flex;
+    flex-direction: row;
+}
+
+.actions{
+    width: 50%;
+    border-radius:10px;
+    background-color: rgba(21, 137, 231, 0.664);
+    color: whitesmoke;
+    border: gray 1px solid;
+    padding:5px;
+    margin: 2px;;
+
+}
+
+select{
+    width:50%;
+    padding:7px;
+}
+.actions :hover{
+    background-color: rgba(70, 207, 231, 0.664);
+    color: whitesmoke;
+    border: rgb(58, 17, 240) 1px solid;
+    
+}
+
+
+.right{
+    font-size: 1rem;
+    width: 50%;
+    padding:7px;
+    margin:2%;
+    background-color: black;
+    color: chartreuse;
+}
