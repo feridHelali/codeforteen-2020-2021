@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+  
+</head>
+<body>
+    <input id="search" name="search" placeholder="search" >
+
+    <h1 class="title">Register form</h1>
+    <form action="homepage.html" name="myForm"  onreset="clean()">
+        <div class="control">
+            <label for="username">Username</label>
+            <input type="text" name="username">
+            <span id="usermessage"></span>
+        </div>
+
+        <div class="control">
+            <label for="email">email</label>
+            <input type="text" name="email">
+            <span id="emailmessage"></span>
+        </div>
+
+        <div class="control">
+            <label for="password">Password</label>
+            <input type="text" name="password">
+            <span id="passwordmessage"></span>
+        </div>
+
+        <div class="actions">
+            <input type="submit" value="submit">
+            <input type="reset" value="clear">
+        </div>
+    </form>
+
+    <script src="./js/lib.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

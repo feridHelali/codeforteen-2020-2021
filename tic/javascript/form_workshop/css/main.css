@@ -1,0 +1,90 @@
+body{
+    display:flex;
+    flex-direction: column;
+    padding:3%;
+    margin:2%;
+    background-color: gainsboro;
+}
+form{
+    padding:5px;
+    margin:2px;
+    align-self: center;
+    border:1px solid gray;
+    border-radius: 1em;
+    box-shadow: rgb(64, 113, 226);
+    display:flex;
+    flex-direction: column;
+    width: 70%;
+    justify-self: center;
+}
+.control{
+    display: flex;
+    flex-direction: row;
+    font-family: sans-serif;
+    padding:5px;
+    margin: 2px;
+}
+input{
+  width:50%;
+  padding:5px;
+  margin:2px;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+label{
+    width:50%;
+  padding:5px;
+  margin:2px;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+.actions{
+    display:flex;
+    flex-direction: row wrap;
+}
+
+.actions>input{
+
+    background-color: blue;
+    color: whitesmoke;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.actions>input:hover{
+    background-color: whitesmoke;
+    color: blue;
+}
+
+.title{
+    align-self: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#search{
+    align-self: center;
+    width: 30%;
+}
+
+#search:hover{
+    border: solid 2px rgba(20, 98, 199, 0.513);
+}
+
+#usermessage{
+    color:red;
+    font-family: monospace;
+    width:30%;
+}
+#passwordmessage{
+    color:red;
+    font-family: monospace;
+    width:30%;
+}
+#emailmessage{
+    color:red;
+    font-family: monospace;
+    width:30%;
+}
