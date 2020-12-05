@@ -9,7 +9,7 @@ const email = myForm.email;
 const emailErrorMessage = document.getElementById('emailmessage');
 
 const password = myForm.password;
-const userErrorMessage = document.getElementById('passwordmessage');
+const passwordErrorMessage = document.getElementById('passwordmessage');
 
 
 // validation helpers functions
@@ -46,7 +46,7 @@ function isNotEmail(email) {
 
 function isNotNumber(str) {
   return {
-      //Todo:To implement
+      //TODO:To implement
   }
 }
 
