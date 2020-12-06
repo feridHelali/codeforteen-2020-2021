@@ -57,7 +57,7 @@ End;
 
 {**********************}
 Begin 
-  Assign(InputFile,'employee.csv');
+  Assign(InputFile,'emp.csv');
    Clrscr;
      Gotoxy(30,2);Writeln('Ste Alfa');
      Gotoxy(20,6);Writeln('1 : Tri a bulles fichier salairies.');
