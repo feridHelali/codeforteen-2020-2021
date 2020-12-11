@@ -1,5 +1,6 @@
 Program Ste_Alfa;
-Uses Wincrt,crt,dos;
+Uses Wincrt,crt,dos,sysutils;
+{$H+}
 Type
   TDate = Record
     day: 1..31;
@@ -18,6 +19,8 @@ Var
   ChMenu: 1..4;
   Size,i: Integer;
   Buffer: TRBuffer;
+
+	(* prSwap : swap to TREmployee Records in The Buffer of Employee*)
 Procedure prSwap(Var left,right:TREmployee);
 Var
   tmpEmployee: TREmployee;
@@ -72,6 +75,7 @@ Begin
 End;
 	(*end of   fnParseLine *)
 
+(* prReadBuffer *)
 Var
   i: 0..100;
   line: String;
@@ -97,6 +101,7 @@ Begin
     End;
   Close(InputFile);
 End;
+(* end Of prReadBuffer procedure *)
 
 (* save the sorted buffer to the target file*)
 Procedure prWriteBuffer(var targetFileName:text;Var Buffer:TRBuffer;Size:Integer);
@@ -112,7 +117,7 @@ Begin
 		 Begin
 		 with Buffer[index] do
 			 Begin
-			 			WriteLn(targetfileName,code,';',name,';',date.day,'/',date.month,'/',date.year,';',salary:10:3);
+			 			WriteLn(targetfileName,code,';',name,';',date.day:2,'/',date.month:2,'/',date.year:4,';',salary:10:3);
 			 end;
 		 end;
 	end;
@@ -143,8 +148,22 @@ End;
 
 	(*   prSelectionSorting sort the buffer on EmployeeName ASC *)
   Procedure prSelectionSorting (Var Buffer:TRBuffer; Size:Integer);
+	var indexOfMin,i,j:Integer;
   Begin
-    Writeln('SelectionSorting works ');
+     for i:=1 to Size-1 Do
+		 Begin
+	      indexOfMin:=i;    (*save the index of Minimal Value *)
+				 for j:=i+1 to Size Do
+				 begin
+				   (* Seek for the index of minValue *)
+				 		if Buffer[indexOfMin].name > Buffer[j].name  Then	indexOfMin:=j;
+				 end;
+						
+				 if indexOfMin<>i then
+				 Begin
+							prSwap(Buffer[i],Buffer[indexOfMin]);
+				 end;
+		 end;
   End;
 
 	(*   prInsertionSorting sort the buffer on Salary DES *)
@@ -187,13 +206,13 @@ End;
          Begin
            prReadBuffer(inputFile,Buffer,Size);
            prSelectionSorting(Buffer,size);
-           prWriteBuffer(InputFile,Buffer,Size);
+           prWriteBuffer(sortedOnName,Buffer,Size);
          End;
       3:
          Begin
            prReadBuffer(inputFile,Buffer,Size);
            prInsertionSorting(Buffer,size);
-           prWriteBuffer(InputFile,Buffer,Size);
+           prWriteBuffer(sortedOnSalary,Buffer,Size);
          End;
       4: Readln;
     End;
