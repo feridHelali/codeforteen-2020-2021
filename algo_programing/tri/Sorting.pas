@@ -170,6 +170,8 @@ End;
   Procedure prInsertionSorting (Var Buffer:TRBuffer; Size:Integer);
 	var tmpEmployee:TREmployee;
 			f_ptr,d_ptr:integer;
+			(* f_ptr: it point to all element from 2 *)
+			(* d_ptr: helper to shift the sorted sub-array to the right *)
   Begin
 	   (* We assume that an array with on elment is yet sorted*)
 		 for f_ptr:=2 to Size Do
@@ -179,7 +181,7 @@ End;
 
 					(* shift the sorted part and insert the current value *)
 					d_ptr:=f_ptr;
-					while (d_ptr>1) AND (Buffer[d_ptr-1].salary>tmpEmployee.salary) Do
+					while (d_ptr>1) AND (Buffer[d_ptr-1].salary<tmpEmployee.salary) Do
 					begin
 						Buffer[d_ptr]:=Buffer[d_ptr-1];  (* shift all the part of the sorted sub-array if current.salary>temp.salary*)
 						d_ptr:=d_ptr-1;
