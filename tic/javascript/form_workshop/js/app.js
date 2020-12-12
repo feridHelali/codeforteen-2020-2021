@@ -48,7 +48,7 @@ password.addEventListener('change', function ($event) {
     if (helpers.isNumber(password) !== '') {
         passwordErrorMessage.innerHTML = `${helpers.isNumber(password)}`;
     }else if(helpers.isLessThan(password,6)!==''){
-        passwordErrorMessage.innerHTML =`<span style='color:blue;'>${isLessThan(password,6)}</span>`;
+        passwordErrorMessage.innerHTML =`<span style='color:blue;'>${helpers.isLessThan(password,6)}</span>`;
     }
     else{
         passwordErrorMessage.innerHTML=''; 
@@ -76,7 +76,7 @@ submitButton.addEventListener('click',function($event){
     }
 
     if(isFormValid(form)){
-        let url= `http://localhost:3000/homepage.html?usename=${form.username}&email=${form.email}&password=${form.password}`;
+        let url= `./homepage.html?usename=${form.username}&email=${form.email}&password=${form.password}`;
         window.location.href = url;
     }else{
         alert('Erreur de validation')
