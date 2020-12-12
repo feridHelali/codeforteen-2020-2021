@@ -168,8 +168,26 @@ End;
 
 	(*   prInsertionSorting sort the buffer on Salary DES *)
   Procedure prInsertionSorting (Var Buffer:TRBuffer; Size:Integer);
+	var tmpEmployee:TREmployee;
+			f_ptr,d_ptr:integer;
   Begin
-    Writeln ('InsertionSorting works');
+	   (* We assume that an array with on elment is yet sorted*)
+		 for f_ptr:=2 to Size Do
+		 Begin
+		 			(* save the value of the current position f_ptr*)
+					tmpEmployee:=Buffer[f_ptr];
+
+					(* shift the sorted part and insert the current value *)
+					d_ptr:=f_ptr;
+					while (d_ptr>1) AND (Buffer[d_ptr-1].salary>tmpEmployee.salary) Do
+					begin
+						Buffer[d_ptr]:=Buffer[d_ptr-1];  (* shift all the part of the sorted sub-array if current.salary>temp.salary*)
+						d_ptr:=d_ptr-1;
+						
+					end;
+					(* Insertion of the saved value at the right place*)
+					Buffer[d_ptr]:=tmpEmployee;
+		 End;
   End;
 	
 {* Main Program*}
