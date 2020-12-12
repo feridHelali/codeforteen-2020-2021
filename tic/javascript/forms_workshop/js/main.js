@@ -3,78 +3,97 @@
 const registerForm = window.document.forms.registerForm;
 const messageOutput = document.getElementById('message-output');
 const output = document.getElementById('output');
-const fulltext = registerForm.fulltext;
+const fullname = registerForm.fullname;
 const cin = registerForm.cin;
 const gender = registerForm.gender;
-const fullname = registerForm.fullname;
 const birthdate = registerForm.birthdate;
-const email = registerForm.email;
+const email = registerForm.email
 const adress = registerForm.adress;
 const zipCode = registerForm.zipcode;
 const city = registerForm.city;
 const situation = registerForm.situation;
 const observation = registerForm.observation;
 
-
 const tools = {
-    displayMessage: function (message) {
+    displayMessage: function displayMessage(message) {
         messageOutput.innerHTML = message;
     },
-    displayRegisterForm: function (form) {
+    displayRegisterForm: function displayRegisterForm(form) {
         output.innerHTML = JSON.stringify(form, 5, 5);
     },
-    isNotEmail: function (email) {
+    isLessThanError: function isLessThanError(str, size) {
+        return str.length < size ? {
+            status: true,
+            message: `Size Error: doit etre > ${size}`
+        } : {
+            status: false,
+            message: ``
+        };
+    },
+    isGreaterThanError: function isGreaterThanError(str, size) {
+        return str.length > size ? {
+            status: true,
+            message: `Size Error : doit etre < ${size}`
+        } : {
+            status: false,
+            message: ""
+        };
+    },
+    isNotEmail: function isNotEmail(email) {
         return (email.indexOf("@") <= 0 || (email.lastIndexOf("@") !== email.indexOf("@"))) ? {
             status: false,
             message: `Size Error : doit etre < ${size}`
         } : {
-                status: true,
-                message: ""
-            };
+            status: true,
+            message: ""
+        };
+
     },
-    isLessThanError: function (str, size) {
-        return str.length < size ? {
-            status: false,
-            message: `Size Error: doit etre > ${size}`
+    itNotContainDot: function itNotContainDot(str) {
+        return str.indexOf('.') === -1 ? {
+            status: true,
+            message: ``
         } : {
-                status: true,
-                message: ""
-            };
+            status: false,
+            message: `Mismatch Error : ne doit pas avoir  . `
+        }
     },
-    isGreaterThanError: function (str, size) {
-        return str.length > size ? {
+    isContainingADot: function (str) {
+        return str.indexOf('.') === -1 ? {
             status: false,
-            message: `Size Error : doit etre < ${size}`
+            message: ``
         } : {
-                status: true,
-                message: ""
-            };
+            status: true,
+            message: `Mismatch Error : email doit avoir . `
+        }
     },
     isNumber: function (str) {
         return !isNaN(str) ? {
             status: true,
-            message: ""
+            message: ``
+        } : {
+            status: false,
+            message: `Type Error: n'est pas numerique`
         }
-            : {
-                status: false,
-                message: `Type error: n'est pas numerique`
-            }
-
-    }
+    },
 }
 
-fullname.addEventListner("change", function ($event) {
+fullname.addEventListener("change", function ($event) {
     let fullname = $event.target.value;
-    let tmp = tools.isGreaterThanError(fullname, 20).status;
-    if (tmp === false) {
-        tools.displayMessage(tmp.message)
-    }
-    else if (tools.isLessThanError(fullname, 10).status === false) {
-        tools.displayMessage(tools.isLessThanError(fullname, 10).message)
-    }
-
+    let validatorLessError=tools.isLessThanError(fullname, 10);   
+    let validatorGreatError = tools.isGreaterThanError(fullname, 20);
+    let message="";
+    if(validatorGreatError.status ){
+        message=validatorGreatError.message;
+    } 
+    else if (validatorLessError.status===true){
+        message=validatorLessError.message;
+    };
+    tools.displayMessage(message);
 });
+
 function validateTheForm() {
+
     console.log(fulltext, cin, gender, birthdate, adress, zipCode, city, situation, observation);
 }
 
