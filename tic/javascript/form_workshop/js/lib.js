@@ -22,17 +22,17 @@ global.helpers = function() {
       : `Mismatch Error : @ est absente`;
   }
 
-  isNumber: function isNumber(str) {
+   function isNumber(str) {
     return !isNaN(str) ? "" : "Type Error: doit etre numérique";
   }
 
-  isContainingDot: function isContainingDot(str) {
+ function isContainingDot(str) {
     return str.indexOf(".") > -1
       ? ""
       : `Mismatch Error : ce champ ne contient pas . `;
   }
 
-  isContainingDot: function isContainingSemiColumn(str) {
+function isContainingSemiColumn(str) {
     return str.indexOf(";") > -1
       ? ``
       : `Mismatch Error :ce champ le contient avoir  ; `;
