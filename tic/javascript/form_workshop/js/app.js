@@ -11,6 +11,7 @@ const emailErrorMessage = document.getElementById('emailmessage');
 const password = myForm.password;
 const passwordErrorMessage = document.getElementById('passwordmessage');
 
+const submitButton = document.getElementById('submit');
 
 // validation helpers functions
 function isLessThan(str, size) {
@@ -24,49 +25,88 @@ function isGreaterThan(str, size) {
 function isEmail(email) {
     return !(email.indexOf("@") <= 0 || (email.lastIndexOf("@") !== email.indexOf("@"))) ?
         '' :
-        `Mismatch Error : c''est n''est pas un email`;
+        `Mismatch Error : @ est absente`;
 }
 
 function isNumber(str) {
-    return isNaN(+str) ?'':'Type Error: doit etre numérique'; 
+    return !isNaN(str) ? '' : 'Type Error: doit etre numérique';
 }
 
 function isContainingDot(str) {
-    return str.indexOf('.') >-1 ? '' : `Mismatch Error : ce champ contient . `
+    return str.indexOf('.') > -1 ? '' : `Mismatch Error : ce champ ne contient pas . `
 }
 
 function isContainingSemiColumn(str) {
-    return str.indexOf(';') > -1 ? `` : `Mismatch Error :ce champ contient avoir  ; `
-   
+    return str.indexOf(';') > -1 ? `` : `Mismatch Error :ce champ le contient avoir  ; `
+
 }
 
+// username field validation ie should greater than 10 less than 20
 username.addEventListener('change', function ($event) {
     $event.preventDefault();
     let username = $event.target.value;
-     if(isGreaterThan(username, 20)!==''){
+    if (isGreaterThan(username, 20) !== '') {
         userErrorMessage.innerHTML = isGreaterThan(username, 20);
-     }else if(isLessThan(username,10)!==''){
-        userErrorMessage.innerHTML = isLessThan(username, 20);
-     }else{
-        userErrorMessage.innerHTML ='';
-     };
+    } else if (isLessThan(username, 10) !== '') {
+        userErrorMessage.innerHTML = isLessThan(username, 10);
+    } else {
+        userErrorMessage.innerHTML = '';
+    };
+});
+
+email.addEventListener('change', function ($event) {
+    $event.preventDefault();
+    let email = $event.target.value;
+    if (isEmail(email) !== '') {
+        emailErrorMessage.innerHTML = `<i>${isEmail(email)}</i>`;
+    }else if(isContainingDot(email)!==''){
+        emailErrorMessage.innerHTML = `<b>${isContainingDot(email)}</b>` 
+    }else{
+        emailErrorMessage.innerHTML=''; 
+    }
+})
+
+password.addEventListener('change', function ($event) {
+    $event.preventDefault();
+    let password = $event.target.value;
+    if (isNumber(password) !== '') {
+        passwordErrorMessage.innerHTML = `${isNumber(password)}`;
+    }else if(isLessThan(password,6)!==''){
+        passwordErrorMessage.innerHTML =`<span style='color:blue;'>${isLessThan(password,6)}</span>`;
+    }
+    else{
+        passwordErrorMessage.innerHTML=''; 
+    }
+})
+
+function isFormValid(form){
+    let valid=true;
+    if( isLessThan(form.username,10)!=='' || isGreaterThan(form.username,20)!==''){
+        valid=false;
+    }else if( isEmail(form.email)!=='' || isContainingDot(form.email)!==''){
+        valid=false;
+    }else if(isNumber(form.password)!=='' || isLessThan(form.password,6)!==''){
+        valid=false
+    }
+    return valid;
+}
+
+submitButton.addEventListener('click',function($event){
+    $event.preventDefault();
+    let form={
+        username:myForm.username.value,
+        email:myForm.email.value,
+        password:myForm.password.value
+    }
+
+    if(isFormValid(form)){
+        window.location.href ='http://localhost:3000/homepage.html';
+    }else{
+        alert('Erreur de validation')
+    }
 });
 
 
 function clean() {
     console.log('implement staff here');
-}
-
-function verif() {
-    username = document.myForm.username.value;
-    if (username.length < 10 || username.length > 50) {
-        alert("username incorrect ! erreure ");
-        return false;
-    }
-
-    email = document.myForm.email.value;
-    if (email.indexOf("@") <= 0 || email.lastIndexOf("@") !== email.indexOf("@")) {
-        alert("email incorrect ! erreure ");
-        return false;
-    }
 }

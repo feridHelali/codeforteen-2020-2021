@@ -11,7 +11,7 @@
     <input id="search" name="search" placeholder="search" >
 
     <h1 class="title">Register form</h1>
-    <form action="homepage.html" name="myForm"  onreset="clean()">
+    <form name="myForm"  onreset="clean()">
         <div class="control">
             <label for="username">Username</label>
             <input type="text" name="username">
@@ -26,12 +26,12 @@
 
         <div class="control">
             <label for="password">Password</label>
-            <input type="text" name="password">
+            <input type="password" name="password">
             <span id="passwordmessage"></span>
         </div>
 
         <div class="actions">
-            <input type="submit" value="submit">
+            <input type="submit" id="submit" value="submit">
             <input type="reset" value="clear">
         </div>
     </form>
