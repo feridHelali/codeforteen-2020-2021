@@ -13,76 +13,45 @@ const passwordErrorMessage = document.getElementById('passwordmessage');
 
 
 // validation helpers functions
-function isLessThanError(str, size) {
-    return str.length < size ? {
-        status: false,
-        message: `Size Error: doit etre > ${size}`
-    } : {
-        status: true,
-        message: ""
-    };
+function isLessThan(str, size) {
+    return str.length > size ? '' : `Size Error: ${str.length} doit etre > ${size}`;
 }
 
-function isGreaterThanError(str, size) {
-    return str.length > size ? {
-        status: false,
-        message: `Size Error : doit etre < ${size}`
-    } : {
-        status: true,
-        message: ""
-    };
+function isGreaterThan(str, size) {
+    return str.length < size ? '' : `Size Error : ${str.length} doit etre < ${size}`;
 }
 
-function isNotEmail(email) {
-    return (email.indexOf("@") <= 0 || (email.lastIndexOf("@") !== email.indexOf("@"))) ? {
-        status: false,
-        message: `Size Error : doit etre < ${size}`
-    } : {
-        status: true,
-        message: ""
-    };
-
+function isEmail(email) {
+    return !(email.indexOf("@") <= 0 || (email.lastIndexOf("@") !== email.indexOf("@"))) ?
+        '' :
+        `Mismatch Error : c''est n''est pas un email`;
 }
 
-function isNotNumber(str) {
-  return {
-      //TODO:To implement
-  }
+function isNumber(str) {
+    return isNaN(+str) ?'':'Type Error: doit etre numérique'; 
 }
 
-function itNotContainDot(str) {
-    return str.indexOf('.') === -1 ? {
-        status: true,
-        message: ``
-    } : {
-        status: false,
-        message: `Mismatch Error : ne doit pas avoir  . `
-    }
+function isContainingDot(str) {
+    return str.indexOf('.') >-1 ? '' : `Mismatch Error : ce champ contient . `
 }
 
-function itNotContainSemiColumn(str) {
-    return str.indexOf(';') === -1 ? {
-        status: true,
-        message: ``
-    } : {
-        status: false,
-        message: `Mismatch Error : ne doit pas avoir  ; `
-    }
+function isContainingSemiColumn(str) {
+    return str.indexOf(';') > -1 ? `` : `Mismatch Error :ce champ contient avoir  ; `
+   
 }
 
 username.addEventListener('change', function ($event) {
     $event.preventDefault();
     let username = $event.target.value;
-
-    if (isGreaterThanError(username, 20).status !== true) {
-        userErrorMessage.innerHTML = isGreaterThanError(username, 20).message;
-    } else if (isLessThanError(username, 10).status !== true) {
-        userErrorMessage.innerHTML = isLessThanError(username, 10).message;
-    } else {
-        userErrorMessage.innerHTML = "";
-    }
-
+     if(isGreaterThan(username, 20)!==''){
+        userErrorMessage.innerHTML = isGreaterThan(username, 20);
+     }else if(isLessThan(username,10)!==''){
+        userErrorMessage.innerHTML = isLessThan(username, 20);
+     }else{
+        userErrorMessage.innerHTML ='';
+     };
 });
+
 
 function clean() {
     console.log('implement staff here');
