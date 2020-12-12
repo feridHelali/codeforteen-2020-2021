@@ -185,7 +185,6 @@ End;
 					begin
 						Buffer[d_ptr]:=Buffer[d_ptr-1];  (* shift all the part of the sorted sub-array if current.salary>temp.salary*)
 						d_ptr:=d_ptr-1;
-						
 					end;
 					(* Insertion of the saved value at the right place*)
 					Buffer[d_ptr]:=tmpEmployee;
