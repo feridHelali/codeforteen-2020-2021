@@ -1,3 +1,5 @@
+const helpers=global.helpers();
+
 // get the form in a variable
 const myForm = window.document.myForm;
 
@@ -13,42 +15,16 @@ const passwordErrorMessage = document.getElementById('passwordmessage');
 
 const submitButton = document.getElementById('submit');
 
-// validation helpers functions
-function isLessThan(str, size) {
-    return str.length > size ? '' : `Size Error: ${str.length} doit etre > ${size}`;
-}
 
-function isGreaterThan(str, size) {
-    return str.length < size ? '' : `Size Error : ${str.length} doit etre < ${size}`;
-}
-
-function isEmail(email) {
-    return !(email.indexOf("@") <= 0 || (email.lastIndexOf("@") !== email.indexOf("@"))) ?
-        '' :
-        `Mismatch Error : @ est absente`;
-}
-
-function isNumber(str) {
-    return !isNaN(str) ? '' : 'Type Error: doit etre numérique';
-}
-
-function isContainingDot(str) {
-    return str.indexOf('.') > -1 ? '' : `Mismatch Error : ce champ ne contient pas . `
-}
-
-function isContainingSemiColumn(str) {
-    return str.indexOf(';') > -1 ? `` : `Mismatch Error :ce champ le contient avoir  ; `
-
-}
 
 // username field validation ie should greater than 10 less than 20
 username.addEventListener('change', function ($event) {
     $event.preventDefault();
     let username = $event.target.value;
-    if (isGreaterThan(username, 20) !== '') {
-        userErrorMessage.innerHTML = isGreaterThan(username, 20);
-    } else if (isLessThan(username, 10) !== '') {
-        userErrorMessage.innerHTML = isLessThan(username, 10);
+    if (helpers.isGreaterThan(username, 20) !== '') {
+        userErrorMessage.innerHTML = helpers.isGreaterThan(username, 20);
+    } else if (helpers.isLessThan(username, 10) !== '') {
+        userErrorMessage.innerHTML = helpers.isLessThan(username, 10);
     } else {
         userErrorMessage.innerHTML = '';
     };
@@ -57,10 +33,10 @@ username.addEventListener('change', function ($event) {
 email.addEventListener('change', function ($event) {
     $event.preventDefault();
     let email = $event.target.value;
-    if (isEmail(email) !== '') {
-        emailErrorMessage.innerHTML = `<i>${isEmail(email)}</i>`;
-    }else if(isContainingDot(email)!==''){
-        emailErrorMessage.innerHTML = `<b>${isContainingDot(email)}</b>` 
+    if (helpers.isEmail(email) !== '') {
+        emailErrorMessage.innerHTML = `<i>${helpers.isEmail(email)}</i>`;
+    }else if(helpers.isContainingDot(email)!==''){
+        emailErrorMessage.innerHTML = `<b>${helpers.isContainingDot(email)}</b>` 
     }else{
         emailErrorMessage.innerHTML=''; 
     }
@@ -69,9 +45,9 @@ email.addEventListener('change', function ($event) {
 password.addEventListener('change', function ($event) {
     $event.preventDefault();
     let password = $event.target.value;
-    if (isNumber(password) !== '') {
-        passwordErrorMessage.innerHTML = `${isNumber(password)}`;
-    }else if(isLessThan(password,6)!==''){
+    if (helpers.isNumber(password) !== '') {
+        passwordErrorMessage.innerHTML = `${helpers.isNumber(password)}`;
+    }else if(helpers.isLessThan(password,6)!==''){
         passwordErrorMessage.innerHTML =`<span style='color:blue;'>${isLessThan(password,6)}</span>`;
     }
     else{
@@ -81,11 +57,11 @@ password.addEventListener('change', function ($event) {
 
 function isFormValid(form){
     let valid=true;
-    if( isLessThan(form.username,10)!=='' || isGreaterThan(form.username,20)!==''){
+    if( helpers.isLessThan(form.username,10)!=='' || helpers.isGreaterThan(form.username,20)!==''){
         valid=false;
-    }else if( isEmail(form.email)!=='' || isContainingDot(form.email)!==''){
+    }else if( helpers.isEmail(form.email)!=='' || helpers.isContainingDot(form.email)!==''){
         valid=false;
-    }else if(isNumber(form.password)!=='' || isLessThan(form.password,6)!==''){
+    }else if(helpers.isNumber(form.password)!=='' || helpers.isLessThan(form.password,6)!==''){
         valid=false
     }
     return valid;
@@ -100,7 +76,8 @@ submitButton.addEventListener('click',function($event){
     }
 
     if(isFormValid(form)){
-        window.location.href ='http://localhost:3000/homepage.html';
+        let url= `http://localhost:3000/homepage.html?usename=${form.username}&email=${form.email}&password=${form.password}`;
+        window.location.href = url;
     }else{
         alert('Erreur de validation')
     }
