@@ -9,7 +9,7 @@ const email = myForm.email;
 const emailErrorMessage = document.getElementById('emailmessage');
 
 const password = myForm.password;
-const userErrorMessage = document.getElementById('passwordmessage');
+const passwordMessage = document.getElementById('passwordmessage');
 
 
 // validation helpers functions
