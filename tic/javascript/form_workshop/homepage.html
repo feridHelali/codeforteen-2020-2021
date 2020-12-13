@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+   
 </head>
 <body>
     <h1>Home Page Works</h1>
+    <h2>Your login Cedentials</h2>
+    <div id="output"></div>
+    <script>
+        const output=document.getElementById('output');
+
+        function addElement(key,value){
+            let _element=document.createElement('li');
+            _element.innerHTML=`${key}:${value}`;
+            _element.style.color='blue';
+            _element.style.fontSize='2rem';
+            output.append(_element);
+        }
+        
+        var urlParams = new URLSearchParams(window.location.search);
+        var entries = urlParams.entries();
+        for(pair of entries) { 
+            addElement(pair[0],pair[1])
+        }
+    </script>
 </body>
 </html>
