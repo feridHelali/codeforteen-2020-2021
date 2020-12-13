@@ -86,7 +86,7 @@ Begin
   If Ioresult<>0 Then
     Begin
       Gotoxy(15,23);
-      Writeln('Erreur de lecture de fichier n°:',Ioresult);
+      Writeln('Erreur de lecture de fichier nø:',Ioresult);
     End
   Else
     Begin
@@ -110,7 +110,7 @@ Begin
   {$I-}
 	rewrite(targetFileName);
 	{$I+}
-	if IOResult<> 0 then Writeln('Erreur d''ecriture sur le disque n°:',IOResult)
+	if IOResult<> 0 then Writeln('Erreur d''ecriture sur le disque n:',IOResult)
 	Else
 	Begin
 		 for index:=1 to size Do
