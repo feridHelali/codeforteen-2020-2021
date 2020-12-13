@@ -1,0 +1,58 @@
+.container{
+    width: 100%;
+    height: 100%;
+    margin:2%;
+    padding:7px;
+    background-color: #e4e4cde1;
+    display: flex;
+    flex-direction: column;
+}
+
+form{
+    padding:10px;
+    margin:3%;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-self: center;
+    border:dashed 1px gray;
+}
+
+.control{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 3px;
+    margin:7px;
+    
+}
+
+label{
+    padding: 2px;
+    margin: 3px;
+    font-family: monospace;
+    font-size: 2.5em;
+}
+
+input{
+    font-family: monospace;
+    font-size: 2.5em;
+    padding: 2px;
+    margin: 3px;
+}
+
+input:hover{
+    border: chocolate 5px solid;
+}
+
+.item{
+    width:50%;
+}
+
+.button{
+    width:100%;
+    background-color: cornflowerblue;
+    color: cornsilk;
+    border-radius: 10px;
+    box-shadow: darkcyan 3 3 4;
+}
