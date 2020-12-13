@@ -73,6 +73,8 @@ Begin
  { return Employee}
   fnParseLigne := employee;
 End;
+
+
 	(*end of   fnParseLine *)
 
 (* prReadBuffer *)
@@ -110,7 +112,7 @@ Begin
   {$I-}
 	rewrite(targetFileName);
 	{$I+}
-	if IOResult<> 0 then Writeln('Erreur d''ecriture sur le disque n#:',IOResult)
+	if IOResult<> 0 then Writeln('Erreur d''ecriture sur le disque n�:',IOResult)
 	Else
 	Begin
 		 for index:=1 to size Do
@@ -185,7 +187,6 @@ End;
 					begin
 						Buffer[d_ptr]:=Buffer[d_ptr-1];  (* shift all the part of the sorted sub-array if current.salary>temp.salary*)
 						d_ptr:=d_ptr-1;
-						
 					end;
 					(* Insertion of the saved value at the right place*)
 					Buffer[d_ptr]:=tmpEmployee;
