@@ -36,7 +36,7 @@ email.addEventListener('change', function ($event) {
     if (helpers.isEmail(email) !== '') {
         emailErrorMessage.innerHTML = `<i>${helpers.isEmail(email)}</i>`;
     }else if(helpers.isContainingDot(email)!==''){
-        emailErrorMessage.innerHTML = `<b>${helpers.isContainingDot(email)}</b>` 
+        emailErrorMessage.innerHTML = `<b>😋${helpers.isContainingDot(email)}</b>` 
     }else{
         emailErrorMessage.innerHTML=''; 
     }
