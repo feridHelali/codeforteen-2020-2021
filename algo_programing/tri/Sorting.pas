@@ -88,7 +88,7 @@ Begin
   If Ioresult<>0 Then
     Begin
       Gotoxy(15,23);
-      Writeln('Erreur de lecture de fichier n�:',Ioresult);
+      Writeln('Erreur de lecture de fichier n#:',Ioresult);
     End
   Else
     Begin
