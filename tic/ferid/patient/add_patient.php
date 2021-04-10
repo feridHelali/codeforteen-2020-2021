@@ -1,81 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="../assets/css/bootstrap.css">
+      <title>Patient</title>
+  </head>
 <body class="container">
-    
 <?php
-    echo('<h1> from Index </h1>');
+    if(isset($_POST['patient_name'])){
+        $patient_name = $_POST['patient_name'];
+    }
+    if(isset($_POST['gender'])){
+       $gender = $_POST['gender'];
 
-    var_dump($_GET);
+    }
+
+    if ( ! defined( 'ABSPATH' ) ) {
+        define( 'ABSPATH', __DIR__ . '/' );
+    }
+
+
+    require_once dirname( ABSPATH ) . '/db/db.php';
+
     
-    echo('<hr>');
-
-    echo('<ul class="list-group">');
-    echo("<li class='list-group-item'> Patient Name : "  . $_GET["patient_name"] . "</li>");
-    echo("<li class='list-group-item'> Patient Gender : "  . $_GET["gender"] . "</li>");
-    echo("</ul>");
-
-   
-    $dbhost = '192.168.1.16';
-    $dbuser = 'ferid';
-    $dbpass = 'toto';
-    $dbname = 'ferid_db';
-   
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass,$dbname);
-
-    if(! $conn ) {
-         die('Could not connect: ');
+    $database=new Database();
+    $connection = $database->connect_to_database();
+    $query ="INSERT INTO patient (patient_name,gender) values ('".$patient_name."','".$gender."');" ; 
+    $res=mysqli_query($connection,$query);
+    if($res){
+        echo('<p class="success"> Patient Added Succefully </p>');
+        echo('<a class="btn btn-success" href="index.php"> Return To Patient List </a>');
+    }else{
+        echo('<p class="danger"> Failure : Patient not Added for some reason :( </p>');
+        echo('<a class="btn btn-success" href="index.php"> Return To Patient List </a>');
     }
     
-    echo 'Connected successfully';
+    $database->close_database();
     
-    $name = $_GET["patient_name"];
-    $gender = $_GET["gender"];
-
-    /* $command ="INSERT INTO patient (patient_name,gender) values ('".$name."','".$gender."');" ;
-    echo($command);
-    mysqli_query($conn,$command);*/
-    $query="Select * From patient;";
-   
-    
-    var_dump($res);  
-    echo('<br><code><ul class="list-group-item">');
-    foreach($res as $row){
-        echo("<li class='list-group-item'>");
-        var_dump($row);
-        echo('</li>');
-
-    } 
-    echo("</code><hr>");
-
-    echo('<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Patient Name</th>
-        <th scope="col">Gender</th>
-      </tr>
-    </thead>
-    <tbody>');
-
-    foreach($res as $row){
-         echo('
-         <tr>
-         <th scope="row">' . $row["id"] .' </th>
-            <td>' . $row["patient_name"] . '</td>
-            <td>' . $row["gender"] .'</td>
-         </tr>');
-
-    } 
-    echo("
-    </tbody>
-    </table>");
-    
-    
-    
-    mysqli_close($conn);
-      
+  
 
 ?>
-</body>
-</html>

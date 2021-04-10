@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
-<?php
-// require head for styling
-$_path = realpath( __DIR__ . '/layout/head.php');
-if($_path) { require_once $_path; }
-
-echo getHead('Cabinet Mahdia'); 
-?>
-
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="assets/css/bootstrap.css">
+      <title>Patient</title>
+  </head>
 <body>
 
 <?php
+  if ( ! defined( 'ABSPATH' ) ) {
+    define( 'ABSPATH', __DIR__ . '/' );
+  }
 // Display Navbar
-$_path = realpath( __DIR__ . '/layout/navbar.php');
+$_path = realpath( ABSPATH . '/layout/navbar.php');
 if($_path) { include $_path; }
 ?>  
 
 <?php
   // Display Navbar
-  $_path = realpath( __DIR__ . '/layout/banner.php');
+  $_path = realpath( ABSPATH . '/layout/banner.php');
   if($_path) { include $_path; }
   ?>
 <div class="container">
@@ -35,14 +37,11 @@ if($_path) { include $_path; }
 </div>
 <?php
   // Display Navbar
-  $_path = realpath( __DIR__ . '/layout/footer.php');
+  $_path = realpath( ABSPATH . '/layout/footer.php');
   if($_path) { include $_path; }
   ?>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/js/jquery.js"></script>
+<script src="./assets/js/bootstrap.js"></script>
 </body>
 <html>
 
