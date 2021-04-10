@@ -2,7 +2,7 @@ Program Palette(Input,Output);
 
 uses Crt,dos;
 Type TAB = Array[1..20] of Byte;
-     MatriceCouleur = Array[1..20,1..20] of Integer;
+     MatriceCouleur = Array[1..20,1..10] of Integer;
 		 TextFile = Text;
 		 
 Var  M : MatriceCouleur;
@@ -47,16 +47,16 @@ Procedure telechargerSource(Var M:MatriceCouleur;Var fichierCouleur:TextFile);
 Begin
   Reset(fichierCouleur);
   colonne:=1;
-	ligne:=1;
+  ligne:=1;
   while(not Eof(fichierCouleur)) Do
 	Begin
 		while (not Eoln(fichierCouleur)) Do
 		Begin
-			read(fichierCouleur,M[colonne,ligne]);
-			ligne:=ligne+1;
+			read(fichierCouleur,M[ligne,colonne]);
+			colonne:=colonne+1;
 		end;
-		colonne:=colonne+1;
-		ligne:=1;
+		ligne:=ligne+1;
+		colonne:=1;
 		readln(fichierCouleur);
 	end;
 	Close(fichierCouleur);
@@ -67,10 +67,9 @@ Begin
 	assign(FichierSource, 'Source.txt');
 	assign(fichierResultat,'Resultat.txt');
  {$I+}
-  WriteLn(IOResult);
-	telechargerSource(M,FichierSource);
+  telechargerSource(M,FichierSource);
 
-	for i:=1 to 20 Do
+	for i:=1 to 10 Do
 		begin
 			for j:=1 to 20 Do
 				Begin
