@@ -14,15 +14,15 @@ Begin
 	 i:=0;
 	 j:=1;
 	 k:=2;
-	 signe:=-1;
+	 signe:=1;
 
 	 Repeat
 		 	s2:=s1;
 			i:=i+2;
 			j:=j+2;
 			k:=k+2;
+			s1:=s1+(signe*1/(i*j*k));
 			signe:=signe*(-1);
-			s1:=s1+(signe*1/(i+j+k));
 		 Until (abs(s1-s2)<epsilon);
 	 Writeln('Pi =',s2*4:1:10);
 End.
