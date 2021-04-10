@@ -47,7 +47,7 @@ Procedure telechargerSource(Var M:MatriceCouleur;Var fichierCouleur:TextFile;Var
 Begin
   Reset(fichierCouleur);
   colonne:=1;
-	ligne:=1;
+  ligne:=1;
   while(not Eof(fichierCouleur)) Do
 	Begin
 		while (not Eoln(fichierCouleur)) Do
@@ -68,9 +68,8 @@ Begin
 	assign(FichierSource, 'Source.txt');
 	assign(fichierResultat,'Resultat.txt');
  {$I+}
-
-	telechargerSource(M,FichierSource,Ligne);
-	for i:=1 to Ligne Do
+  telechargerSource(M,FichierSource);
+	for i:=1 to 10 Do
 		begin
 			for j:=1 to 10Do
 				Begin
