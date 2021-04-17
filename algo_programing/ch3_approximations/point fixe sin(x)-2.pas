@@ -15,9 +15,10 @@ Begin
     	x:=xo;
     	xo:=sin(x)-2;
     	iteration:=iteration+1;
+
+        Writeln('xo= ',xo);
     Until (abs(x-xo)<=Epsylone);
-    Writeln('x=  ',x);
-    Writeln('xo= ',xo);
+
 End;
 
 Begin

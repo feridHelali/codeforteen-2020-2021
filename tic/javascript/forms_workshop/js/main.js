@@ -1,4 +1,5 @@
 // intercepting main DOM elements
+
 const registerForm = window.document.forms.registerForm;
 const messageOutput = document.getElementById('message-output');
 const output = document.getElementById('output');
@@ -94,7 +95,6 @@ fullname.addEventListener("change", function ($event) {
 function validateTheForm() {
 
     console.log(fulltext, cin, gender, birthdate, adress, zipCode, city, situation, observation);
-
 }
 
 
