@@ -59,8 +59,9 @@ Begin
 	Begin
         Write(F,Random(1000));
     End;
+    
     Close(F);
-    {$I-}
+
     Tri_Comptage(F,F2);
     {$I+}
     Writeln(IoResult);
