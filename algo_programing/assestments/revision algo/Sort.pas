@@ -8,7 +8,7 @@ type
                 End;
     buffer = array [1..100] of eleve;
 var
-    tfile,bubblename,selectionsection:text;
+    tfile,bubblename,selectionsection,insertionage:text;
     Rtable:buffer;
     i:integer;
 Procedure read_from_file (var tfile:text;var Rtable:buffer;var i:Integer);
@@ -78,6 +78,26 @@ Begin
     End;
 End;
 
+
+Procedure Insertion_Sort_Age (var rtable:buffer;i:integer);
+Var
+    j,k:Integer;
+    Tmp:eleve;
+Begin
+for j:=2 to i Do
+  Begin
+    Tmp:=rtable[j];
+    k:=j;
+	     while (k > 1) and (rtable[k-1].age > Tmp.age)   do
+				begin
+				rtable[k]:=rtable[k-1];
+				k:=k-1;
+				end;
+    rtable[k]:=tmp;
+  End;
+End; 
+
+
 Procedure Buffer_Output(Var Sort:Text;rtable:Buffer;i:Integer);
 Var
     j:Integer;
@@ -104,9 +124,12 @@ Begin
 	Assign(tfile,'eleve.txt');
 	Assign(bubblename,'tri1.txt');
 	Assign(selectionsection,'tri2.txt');
+	Assign(insertionage,'tri3.txt');
 	read_from_file(tfile,Rtable,i);
 	selection_sort_section(rtable,i);
     Buffer_Output(selectionsection,rtable,i);
     bubble_sort_name(rtable,i);
     Buffer_Output(bubblename,rtable,i);
+    insertion_sort_age(rtable,i);
+    Buffer_Output(insertionage,rtable,i);
 End.
