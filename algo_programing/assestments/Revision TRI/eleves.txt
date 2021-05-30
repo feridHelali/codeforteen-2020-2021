@@ -1,0 +1,8 @@
+Belgacem Samer;Ingenieur;23
+Derouich Amine;Sciences Experimentales;17
+Abdallah Slouma;Sciences Info;18
+Sakka Badie;Sciences Info;18
+Chedly Ramez;Sciences Info;19
+Sioud Mohamed;Sciences Info;25
+Mustafa Lamine;Eco Gestion;22
+Amine Amine;Lettres;21

@@ -1,0 +1,7 @@
+Badie Sakka;sciences info;19
+Mohamed Sioud;sciences info;17
+Adem Ben Salem;sciences techniques;18
+Samer Belgacem;ingenieur info;25
+Amna Sioud;sciences de la vie el la terre;16
+Yasmine Maoui;eco gestion;18
+Ali Sfar;lettres;15
