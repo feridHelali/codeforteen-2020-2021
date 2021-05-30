@@ -29,8 +29,8 @@
 // SHOW Table Structure
 > DESCRIBE table_name;
 
-// Insert data into table_name
-> INSERT INTO table_name SET column_name_1 = Value_1,
+// Update table_name
+> UPDATE table_name SET column_name_1 = Value_1,
 							 column_name_2 = Value_2,
 							 column_name_3 = Value_3,
 							 ...
